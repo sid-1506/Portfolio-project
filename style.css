@@ -49,7 +49,7 @@
     .nav-links a {
       font-size: 0.875rem; font-weight: 400;
       color: var(--mid); text-decoration: none;
-      letter-spacing: 0.02em; transition: color 0.2s;
+      letter-spacing: 0.02em; transition: all 0.3s ease;
     }
     .nav-links a:hover { color: var(--ink); }
 
@@ -145,7 +145,7 @@
       display: inline-flex; align-items: center; gap: 8px;
       padding: 0.75rem 1.75rem; border-radius: 100px;
       font-size: 0.875rem; font-weight: 500;
-      text-decoration: none; transition: all 0.25s;
+      text-decoration: none; transition: all 0.3s ease;
       cursor: pointer; border: none;
     }
     .btn-dark { background: var(--ink); color: var(--white); }
@@ -203,13 +203,13 @@
     .skill-group:hover { background: var(--off-white); }
     .skill-group-title { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light); margin-bottom: 1.25rem; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag { display: inline-block; padding: 0.3rem 0.75rem; background: var(--off-white); border-radius: 100px; font-size: 0.82rem; color: var(--mid); transition: all 0.2s; }
+    .tag { display: inline-block; padding: 0.3rem 0.75rem; background: var(--off-white); border-radius: 100px; font-size: 0.82rem; color: var(--mid); transition: all 0.3s ease; }
     .skill-group:hover .tag { background: var(--border); color: var(--ink); }
 
     /* ── PROJECTS ── */
     #projects { background: var(--off-white); }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem; }
-    .project-card { background: var(--white); border-radius: 20px; padding: 2.25rem; border: 1px solid var(--border); transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .project-card { background: var(--white); border-radius: 20px; padding: 2.25rem; border: 1px solid var(--border); transition: all 0.3s ease; }
     .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.07); border-color: #d4d4ce; }
     .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
     .project-number { font-family: var(--serif); font-size: 2.5rem; line-height: 1; color: var(--border); font-style: italic; }
@@ -284,3 +284,50 @@
       .hero-name { font-size: 2.8rem; }
       .skills-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── NEW FEATURES (ADDITIVE) ── */
+    
+    /* Custom Cursor */
+    .custom-cursor {
+      position: fixed; top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--ink); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1), height 0.25s cubic-bezier(0.25, 1, 0.5, 1), background 0.25s ease;
+    }
+    .custom-cursor.magnetic {
+      width: 44px; height: 44px;
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 768px) { .custom-cursor { display: none; } }
+    
+    /* Perf Badge */
+    .perf-badge {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--light); margin-bottom: 2rem; display: inline-block;
+      animation: fadeUp 0.9s 0.45s both;
+    }
+    
+    /* Micro-interactions: Nav link underline */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--ink); transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    
+    /* Micro-interactions: Button Ripple */
+    .btn { position: relative; overflow: hidden; }
+    .ripple {
+      position: absolute; border-radius: 50%; transform: scale(0);
+      background: rgba(255, 255, 255, 0.25); pointer-events: none;
+      animation: rippleAnim 0.6s linear;
+    }
+    .btn-outline .ripple { background: rgba(0, 0, 0, 0.08); }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+    
+    /* Project Card Soft Scale & Shadow */
+    .project-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.03); background: var(--hover-bg); }
+    .project-card:hover .tool-tag { background: rgba(0,0,0,0.04); color: var(--ink); }
