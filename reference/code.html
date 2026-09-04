@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Krishnakant Rout — Full Stack Developer &amp; Freelance Web Engineer</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Editorial Serif (Instrument Serif / Playfair) + Modern Grotesk (Plus Jakarta Sans) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            stone: {
+              50: '#FAF9F6',
+              100: '#F4F4F2',
+              200: '#E8E8E5',
+              300: '#D5D5D1',
+              400: '#A2A29D',
+              800: '#27272A',
+              900: '#18181B',
+              950: '#0F0F11',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Typography & Global Refinements -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAFAF9;
+      color: #18181B;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    .font-editorial {
+      font-family: 'Instrument Serif', Georgia, serif;
+    }
+  </style>
+<!-- Subtle Micro-interactions and Editorial Decor -->
+<style data-purpose="decorations">
+    .badge-pulse {
+      animation: pulseGreen 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(1.15); }
+    }
+
+    /* Editorial link hover underline transition */
+    .link-hover-effect {
+      position: relative;
+    }
+    .link-hover-effect::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .link-hover-effect:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Scroll reveal animations */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger line reveal utility */
+    .hero-line {
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+    .hero-line-inner {
+      display: inline-block;
+      transform: translateY(115%);
+      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-line-inner.line-revealed {
+      transform: translateY(0);
+    }
+
+    /* Floating preview follower */
+    #project-preview-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 60;
+      width: 320px;
+      height: 200px;
+      opacity: 0;
+      transform: translate3d(-50%, -50%, 0) scale(0.92);
+      transition: opacity 0.3s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    #project-preview-follower.active {
+      opacity: 1;
+      transform: translate3d(-50%, -50%, 0) scale(1.02);
+    }
+    #project-preview-follower img,
+    #project-preview-follower .preview-pane {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+    }
+    #project-preview-follower .preview-pane.is-visible {
+      opacity: 1;
+    }
+
+    /* Project row hover state */
+    .editorial-project-row {
+      transition: background-color 0.4s ease, padding 0.4s ease;
+    }
+    .editorial-project-row:hover {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+    .editorial-project-row:hover .row-arrow {
+      transform: translate(4px, -4px);
+    }
+    .editorial-project-row:hover .row-title-highlight {
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body class="bg-[#FAFAF9] text-stone-900 selection:bg-stone-900 selection:text-[#FAF9F6] antialiased">
+<!-- Dynamic Agency Hover Preview Layer -->
+<div class="hidden md:block" id="project-preview-follower">
+<img alt="Stuti Girls Hostel Preview" class="preview-pane" id="preview-img-stuti" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRVJEi2Qk7KegSvwHVWxIFtJcV6CiuNbeNoeHnZpEpzRfMgZucwoodK-J5jrANu-OMBjJGYZyIG6GC9Xh904-5BIFduzmsPlFTGmBveuxcDjRaJ6Jp5Sq870Gaw-ILQetg98-fz3rDNgGN7jRP7QgWG5OSO-oHtyXPO2KMLCGZf2wGaniPv2-FT-E451HmiJwgvvfG1gjZow0TiTSoYW9DA12uM4Xs97gY5TaoTO9zN7zR-p7c-BFJ5knYrVsF_WUqrWs"/>
+<img alt="Ravariya Green Energy Preview" class="preview-pane" id="preview-img-ravariya" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYrWJLoctO9CMmKJ_5UkahY7iwwA2rrQSk5WZChEIAjSWIIK8Bx6F51Gt0i4k1keOAC15uPylEnP6hPIfYmS4KZIkC6UOi3Y1RxSXeNv78Kqb8asIQy7kmcUHFZP48HSC_o2Xh92Ir4nc95KSdXE5OSwmItGKZ19YP2bUiWuLHqFEdbTRZhAa8LiG43xVmC4BC1vUeRaLmMWVDrgvQDGY4G0z65pae0LwJ1rlkyqugTQGlxzxYWNGc4A7mDqH3tp0mLBA"/>
+<img alt="Patidar Car Boutique Preview" class="preview-pane" id="preview-img-patidar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlel4P0SpkCdtx7xe7HWJurQ0J98yIX7PAFC3TYhJJiIVTjDaUBfNl39gtMkk03yeXbvsW6syGeYhAFFI7wMAlgSdm1BHmis16bb6izcQQY__YrptYtHgy6QDwiZZgyVXLKrfE9M7AuCRcg-hXmduk0JDyXhbEmz8nx7OBNn97VZR-JhyXibGcpZTFZ8N3zfsNO00OpsYRDCfasYIebvhIvlS4y2vcwveoV1yQlulgs3z5KIsxZYXL4-lJuWlsGAMgxo8"/>
+<div class="preview-pane bg-stone-950 p-6 flex flex-col justify-between text-white border border-stone-800" id="preview-img-airlock">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase">ZERO-TRUST PROTOCOL</span>
+<span class="text-xs">🏆 HACKVERSE</span>
+</div>
+<div>
+<h4 class="text-xl font-light text-white mb-1">AirLock Architecture</h4>
+<p class="text-xs text-stone-400">Granular role-based JWT auth &amp; microservice invalidation engine.</p>
+</div>
+<div class="text-[10px] font-mono text-stone-500">github.com/sid-1506/AirLock</div>
+</div>
+</div>
+<!-- BEGIN: MainHeader -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#FAFAF9]/90 backdrop-blur-md border-b border-stone-200/70 transition-all">
+<div class="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+<!-- Brand & Availability -->
+<div class="flex items-center gap-4">
+<a class="group flex items-center gap-2" href="#hero">
+<span class="font-medium tracking-tight text-lg text-stone-900 group-hover:text-black">Krishnakant Rout</span>
+</a>
+<div class="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-stone-100 border border-stone-200 text-xs font-medium text-stone-600">
+<span class="w-2 h-2 rounded-full bg-emerald-500 badge-pulse"></span>
+<span>Available for hire</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 text-sm font-normal text-stone-600">
+<a class="link-hover-effect hover:text-stone-950 transition-colors" href="#work">Selected Work</a>
+<a class="link-hover-effect hover:text-stone-950 transition-colors" href="#stack">Tech Stack</a>
+<a class="link-hover-effect hover:text-stone-950 transition-colors" href="#about">About</a>
+<a class="link-hover-effect hover:text-stone-950 transition-colors" href="#contact">Contact</a>
+</nav>
+<!-- Action & Socials -->
+<div class="flex items-center gap-3">
+<a aria-label="GitHub Profile" class="hidden lg:inline-flex items-center justify-center h-9 px-3.5 rounded-full border border-stone-200 text-xs text-stone-700 hover:bg-stone-100 hover:border-stone-300 transition" href="https://github.com/sid-1506" rel="noopener noreferrer" target="_blank">
+          GitHub
+        </a>
+<a aria-label="LinkedIn Profile" class="hidden lg:inline-flex items-center justify-center h-9 px-3.5 rounded-full border border-stone-200 text-xs text-stone-700 hover:bg-stone-100 hover:border-stone-300 transition" href="https://www.linkedin.com/in/krishnakant-rout-867720292/" rel="noopener noreferrer" target="_blank">
+          LinkedIn
+        </a>
+<a class="inline-flex items-center justify-center h-10 px-5 rounded-full bg-stone-900 text-stone-50 text-xs font-medium tracking-wide hover:bg-stone-800 transition" href="#contact">
+          Let's Talk
+        </a>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroSection -->
+<section class="pt-36 md:pt-48 pb-16 md:pb-24 px-6 md:px-10 max-w-7xl mx-auto border-b border-stone-200/80" id="hero">
+<!-- Super-label / Domain tag -->
+<div class="flex items-center gap-2 mb-6 reveal-on-scroll">
+<span class="text-xs uppercase tracking-[0.25em] font-semibold text-stone-500">Full Stack Developer &amp; Freelance Engineer</span>
+<span class="w-8 h-px bg-stone-300"></span>
+</div>
+<!-- Editorial Oversized Headline -->
+<div class="max-w-5xl">
+<h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[5.4rem] tracking-tight leading-[1.05] font-light text-stone-950 mb-8">
+<span class="hero-line"><span class="hero-line-inner">Building high-performance</span></span>
+<span class="hero-line"><span class="hero-line-inner">web applications with</span></span>
+<span class="hero-line">
+<span class="hero-line-inner">
+<span class="font-editorial italic font-normal text-stone-800 tracking-normal pr-1">precision craft</span> 
+      &amp; modern motion.
+    </span>
+</span>
+</h1>
+<p class="text-lg md:text-xl text-stone-600 font-light max-w-3xl leading-relaxed reveal-on-scroll">
+  Specializing in enterprise-ready Next.js &amp; MERN ecosystems, scalable backend microservices, and boutique design aesthetics engineered for tangible business conversion.
+</p>
+</div>
+<!-- Metadata Metric Bar -->
+<div class="mt-16 pt-8 border-t border-stone-200/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-left reveal-on-scroll">
+<div>
+<p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Location</p>
+<p class="text-sm md:text-base font-medium text-stone-900">Mumbai, Maharashtra, India</p>
+</div>
+<div>
+<p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Delivered Work</p>
+<p class="text-sm md:text-base font-medium text-stone-900">10+ Real-World Clients</p>
+</div>
+<div>
+<p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Hackathon Winner</p>
+<p class="text-sm md:text-base font-medium text-stone-900">Sheryians HACKVERSE (AirLock)</p>
+</div>
+<div>
+<p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Academics</p>
+<p class="text-sm md:text-base font-medium text-stone-900">BCA Candidate (2023 – 2026)</p>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: SelectedWorkSection (Editorial Agency List Layout) -->
+<section class="py-24 px-6 md:px-10 max-w-7xl mx-auto" id="work">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-stone-200/80 reveal-on-scroll">
+<div>
+<span class="text-xs uppercase tracking-[0.2em] font-semibold text-stone-500">Portfolio</span>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-editorial italic font-normal text-stone-950 mt-1">
+  Selected Client Commissions &amp; Projects
+</h2>
+</div>
+<p class="text-sm text-stone-500 mt-4 md:mt-0 font-normal">
+  Curated showcase from 10+ completed production deployments
+</p>
+</div>
+<!-- Pure Editorial Minimalist Rows -->
+<div class="divide-y divide-stone-200/80 border-b border-stone-200/80">
+<!-- Row 1: Stuti Girls Hostel -->
+<div class="editorial-project-row group py-10 md:py-12 transition-all cursor-pointer reveal-on-scroll" data-preview-target="preview-img-stuti">
+<a class="block" href="https://stutigirlshostel.vercel.app/" rel="noopener noreferrer" target="_blank">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-baseline">
+<!-- Index & Title -->
+<div class="md:col-span-6 flex items-baseline gap-6 sm:gap-8">
+<span class="font-mono text-xs sm:text-sm text-stone-400 tracking-wider">01</span>
+<div>
+<div class="flex items-center gap-3">
+<h3 class="text-2xl sm:text-3xl md:text-4xl font-normal text-stone-950 row-title-highlight transition-all">
+                Stuti Girls Hostel
+              </h3>
+<span class="inline-block md:hidden text-xs px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-mono">Live</span>
+</div>
+<p class="text-stone-500 text-sm font-light mt-1.5 max-w-md">
+              Boutique student residence platform with responsive floorplan tours &amp; live room reservations.
+            </p>
+</div>
+</div>
+<!-- Meta / Services / Discipline -->
+<div class="md:col-span-4 flex flex-wrap items-center gap-2 md:gap-3 text-xs text-stone-600">
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Next.js</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Tailwind CSS</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Framer Motion</span>
+<span class="text-stone-400 font-mono pl-1 hidden sm:inline">Bhopal Studio</span>
+</div>
+<!-- Year & Action Icon -->
+<div class="md:col-span-2 flex items-center justify-between md:justify-end gap-6 text-sm font-mono text-stone-500">
+<span>2024</span>
+<span class="row-arrow w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center text-stone-900 group-hover:bg-stone-950 group-hover:text-white group-hover:border-stone-950 transition duration-300">
+            ↗
+          </span>
+</div>
+</div>
+</a>
+</div>
+<!-- Row 2: Ravariya Green Energy -->
+<div class="editorial-project-row group py-10 md:py-12 transition-all cursor-pointer reveal-on-scroll" data-preview-target="preview-img-ravariya">
+<a class="block" href="https://ravariya.vercel.app/" rel="noopener noreferrer" target="_blank">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-baseline">
+<!-- Index & Title -->
+<div class="md:col-span-6 flex items-baseline gap-6 sm:gap-8">
+<span class="font-mono text-xs sm:text-sm text-stone-400 tracking-wider">02</span>
+<div>
+<div class="flex items-center gap-3">
+<h3 class="text-2xl sm:text-3xl md:text-4xl font-normal text-stone-950 row-title-highlight transition-all">
+                Ravariya Green Energy
+              </h3>
+<span class="inline-block md:hidden text-xs px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-mono">Industrial</span>
+</div>
+<p class="text-stone-500 text-sm font-light mt-1.5 max-w-md">
+              Corporate ecosystem for an IS 16087:2025 certified bio-gas manufacturer and industrial energy conversion plant.
+            </p>
+</div>
+</div>
+<!-- Meta / Services / Discipline -->
+<div class="md:col-span-4 flex flex-wrap items-center gap-2 md:gap-3 text-xs text-stone-600">
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">React</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Node.js</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Clean Energy</span>
+<span class="text-stone-400 font-mono pl-1 hidden sm:inline">Infrastructure</span>
+</div>
+<!-- Year & Action Icon -->
+<div class="md:col-span-2 flex items-center justify-between md:justify-end gap-6 text-sm font-mono text-stone-500">
+<span>2024</span>
+<span class="row-arrow w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center text-stone-900 group-hover:bg-stone-950 group-hover:text-white group-hover:border-stone-950 transition duration-300">
+            ↗
+          </span>
+</div>
+</div>
+</a>
+</div>
+<!-- Row 3: Patidar Car Boutique -->
+<div class="editorial-project-row group py-10 md:py-12 transition-all cursor-pointer reveal-on-scroll" data-preview-target="preview-img-patidar">
+<a class="block" href="https://patidarcarboutique.vercel.app/" rel="noopener noreferrer" target="_blank">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-baseline">
+<!-- Index & Title -->
+<div class="md:col-span-6 flex items-baseline gap-6 sm:gap-8">
+<span class="font-mono text-xs sm:text-sm text-stone-400 tracking-wider">03</span>
+<div>
+<div class="flex items-center gap-3">
+<h3 class="text-2xl sm:text-3xl md:text-4xl font-normal text-stone-950 row-title-highlight transition-all">
+                Patidar Car Boutique
+              </h3>
+<span class="inline-block md:hidden text-xs px-2 py-0.5 rounded bg-stone-100 text-stone-800 font-mono">Automotive</span>
+</div>
+<p class="text-stone-500 text-sm font-light mt-1.5 max-w-md">
+              High-contrast luxury automotive digital atelier highlighting bespoke upholstery tailoring &amp; 10H ceramic shield protections.
+            </p>
+</div>
+</div>
+<!-- Meta / Services / Discipline -->
+<div class="md:col-span-4 flex flex-wrap items-center gap-2 md:gap-3 text-xs text-stone-600">
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">React.js</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Redux</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Luxury UI</span>
+<span class="text-stone-400 font-mono pl-1 hidden sm:inline">Showcase</span>
+</div>
+<!-- Year & Action Icon -->
+<div class="md:col-span-2 flex items-center justify-between md:justify-end gap-6 text-sm font-mono text-stone-500">
+<span>2024</span>
+<span class="row-arrow w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center text-stone-900 group-hover:bg-stone-950 group-hover:text-white group-hover:border-stone-950 transition duration-300">
+            ↗
+          </span>
+</div>
+</div>
+</a>
+</div>
+<!-- Row 4: AirLock (Sheryians HACKVERSE Winner) -->
+<div class="editorial-project-row group py-10 md:py-12 transition-all cursor-pointer reveal-on-scroll" data-preview-target="preview-img-airlock">
+<a class="block" href="https://github.com/sid-1506/AirLock" rel="noopener noreferrer" target="_blank">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-baseline">
+<!-- Index & Title -->
+<div class="md:col-span-6 flex items-baseline gap-6 sm:gap-8">
+<span class="font-mono text-xs sm:text-sm text-stone-400 tracking-wider">04</span>
+<div>
+<div class="flex items-center gap-3">
+<h3 class="text-2xl sm:text-3xl md:text-4xl font-normal text-stone-950 row-title-highlight transition-all">
+                AirLock — Zero-Trust Access Protocol
+              </h3>
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300/80 font-mono">
+                🏆 Winner
+              </span>
+</div>
+<p class="text-stone-500 text-sm font-light mt-1.5 max-w-md">
+              Awarded Hackathon winner at Sheryians HACKVERSE. Granular role-based token authentication &amp; microservice invalidation architecture.
+            </p>
+</div>
+</div>
+<!-- Meta / Services / Discipline -->
+<div class="md:col-span-4 flex flex-wrap items-center gap-2 md:gap-3 text-xs text-stone-600">
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Node.js</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">MongoDB</span>
+<span class="px-2.5 py-1 rounded bg-stone-100 text-stone-800 font-mono">Cybersecurity</span>
+<span class="text-stone-400 font-mono pl-1 hidden sm:inline">Hackathon</span>
+</div>
+<!-- Year & Action Icon -->
+<div class="md:col-span-2 flex items-center justify-between md:justify-end gap-6 text-sm font-mono text-stone-500">
+<span>2023</span>
+<span class="row-arrow w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center text-stone-900 group-hover:bg-stone-950 group-hover:text-white group-hover:border-stone-950 transition duration-300">
+            ↗
+          </span>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- END: SelectedWorkSection -->
+<!-- BEGIN: TechStackSection -->
+<section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-stone-200/80" id="stack">
+<div class="mb-14 reveal-on-scroll">
+<span class="text-xs uppercase tracking-[0.2em] font-semibold text-stone-500">Capabilities</span>
+<h2 class="text-3xl sm:text-4xl font-editorial italic font-normal text-stone-950 mt-1">
+  Engineering Core &amp; Capabilities
+</h2>
+<p class="text-sm text-stone-500 mt-2">
+  Curated tools, frameworks, and architecture paradigms applied to daily product delivery.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1: Frontend -->
+<div class="p-8 rounded-2xl bg-white border border-stone-200/80 flex flex-col justify-between reveal-on-scroll hover:border-stone-400 transition duration-300">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono text-stone-400">01 / CLIENT-SIDE</span>
+<svg class="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-medium text-stone-900 mb-3">Modern Frontend Craft</h3>
+<p class="text-stone-500 text-sm font-light leading-relaxed mb-6">
+  Architecting fluent, mobile-first, and highly responsive user interfaces with sub-second page loads.
+</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">React.js</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Next.js</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Redux Toolkit</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">React Router</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Tailwind CSS</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Framer Motion</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">JavaScript (ES6+)</span>
+</div>
+</div>
+<!-- Card 2: Backend -->
+<div class="p-8 rounded-2xl bg-white border border-stone-200/80 flex flex-col justify-between reveal-on-scroll hover:border-stone-400 transition duration-300">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono text-stone-400">02 / SERVER &amp; DATA</span>
+<svg class="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-medium text-stone-900 mb-3">Backend &amp; Microservices</h3>
+<p class="text-stone-500 text-sm font-light leading-relaxed mb-6">
+  Building stateless APIs, fault-tolerant endpoints, secured database schemas, and structured routing layers.
+</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Node.js</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Express.js</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">MongoDB</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Mongoose</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">RESTful APIs</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Postman</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">JWT Auth</span>
+</div>
+</div>
+<!-- Card 3: Core CS & Fundamentals -->
+<div class="p-8 rounded-2xl bg-white border border-stone-200/80 flex flex-col justify-between reveal-on-scroll hover:border-stone-400 transition duration-300">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono text-stone-400">03 / FUNDAMENTALS</span>
+<svg class="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-medium text-stone-900 mb-3">Computer Science Core</h3>
+<p class="text-stone-500 text-sm font-light leading-relaxed mb-6">
+  Rigorous foundations in data complexity, algorithmic analysis, edge case mitigation, and execution speed.
+</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">DSA</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Algorithmic Design</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Problem Solving</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Code Optimization</span>
+<span class="text-xs px-2.5 py-1 rounded bg-stone-50 border border-stone-200 font-mono text-stone-700">Git &amp; Versioning</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: TechStackSection -->
+<!-- BEGIN: AboutSection -->
+<section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-stone-200/80" id="about">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+<!-- Left Column: Portrait & Identity -->
+<div class="lg:col-span-5 reveal-on-scroll">
+<div class="relative">
+<div class="overflow-hidden rounded-3xl bg-stone-200 border border-stone-200/90 shadow-sm aspect-[4/5] max-w-md mx-auto lg:max-w-none">
+<img alt="Krishnakant Rout - Portrait" class="w-full h-full object-cover object-top hover:scale-[1.03] transition duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDCWF9mwpypt_E6Nzs00owMCF4CUDmb-OpfE05Tgg78NwXG3KuHM57HQGAauyLpGfokUmX_ub-i0v3rPAp9OTfUfooG0otpbByLQA6tGiIJlrJB8aQgR4dnCWlVlrWlNcj_5Tup5kdihcKMysmL2F3D5dWH6ihkF9wrE_oV60OdPbuUpAR-UQaBw2TuA4Dw1eLkAyORXAyJCaLH34rKp-q48RZPU9HVjd_MfG6DyH5Sa5oCY7a3r57eyt7oOpK8Q2dBm8"/>
+</div>
+<div class="mt-4 flex items-center justify-between text-xs text-stone-500 px-2 font-mono">
+<span>KRISHNAKANT ROUT</span>
+<span>MUMBAI, IN</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Editorial Narrative & Career Highlights -->
+<div class="lg:col-span-7 space-y-8 reveal-on-scroll">
+<div>
+<span class="text-xs uppercase tracking-[0.2em] font-semibold text-stone-500">Biography</span>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-editorial italic font-normal text-stone-950 mt-1">
+  Balancing algorithmic rigor with purposeful design.
+</h2>
+</div>
+<div class="space-y-5 text-stone-600 font-light text-base sm:text-lg leading-relaxed">
+<p>
+  I am a full-stack engineer and freelance web developer based in Mumbai, India. My passion lies in crafting high-impact digital experiences that avoid generic cookie-cutter templates in favor of bespoke typography, clean layout hierarchy, and responsive performance.
+</p>
+<p>
+  Having successfully partnered with <strong class="text-stone-900 font-medium">10+ direct clients</strong> across hospitality, industrial renewable energies, and luxury automotive industries, I take projects from initial design wireframes to fully productionized cloud platforms.
+</p>
+<p>
+  Beyond freelance engagements, I actively challenge myself in competitive software environments, recently winning the <span class="text-stone-900 font-medium underline decoration-stone-300 underline-offset-4">Sheryians HACKVERSE Hackathon</span> with our access-control system <em class="font-editorial text-lg text-stone-950">AirLock</em>.
+</p>
+</div>
+<!-- Academic Credentials Card -->
+<div class="p-6 rounded-2xl bg-white border border-stone-200">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-xs font-mono uppercase text-stone-400 mb-1">Education &amp; Degree</p>
+<h4 class="text-lg font-medium text-stone-900">Bachelor of Computer Applications (BCA)</h4>
+<p class="text-stone-500 text-sm mt-0.5">Core focus on Software Engineering, Data Structures, and Database Management</p>
+</div>
+<span class="text-xs font-mono font-medium px-2.5 py-1 rounded bg-stone-100 text-stone-700">2023 — 2026</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: AboutSection -->
+<!-- BEGIN: ContactSection -->
+<section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-stone-200/80" id="contact">
+<div class="rounded-3xl bg-stone-950 text-stone-50 p-8 sm:p-14 lg:p-20 relative overflow-hidden reveal-on-scroll">
+<!-- Decorative Backdrop Graphic -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-stone-800/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-900 border border-stone-800 text-xs text-stone-300 mb-6">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Open for projects &amp; full-time roles</span>
+</div>
+<h2 class="text-3xl sm:text-5xl md:text-6xl font-light tracking-tight leading-tight mb-6">
+  Have an idea or project in mind? 
+  <span class="font-editorial italic block text-stone-300 font-normal">Let’s build something enduring together.</span>
+</h2>
+<p class="text-stone-400 text-base md:text-lg font-light mb-12 max-w-xl">
+  Whether you need a full-stack web application, a modern corporate landing page, or high-performance frontend engineering, my inbox is open.
+</p>
+<!-- Actionable Contact Links -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-stone-800/80 pt-10">
+<div>
+<p class="text-xs uppercase tracking-wider text-stone-500 font-mono mb-2">Direct Email</p>
+<a class="text-lg md:text-xl font-medium text-stone-100 hover:text-emerald-400 transition" href="mailto:krishnakantrout1506@gmail.com">
+  krishnakantrout1506@gmail.com
+</a>
+</div>
+<div>
+<p class="text-xs uppercase tracking-wider text-stone-500 font-mono mb-2">Telephone / WhatsApp</p>
+<a class="text-lg md:text-xl font-medium text-stone-100 hover:text-emerald-400 transition" href="tel:+919359834320">
+  +91 93598 34320
+</a>
+</div>
+<div>
+<p class="text-xs uppercase tracking-wider text-stone-500 font-mono mb-2">Location</p>
+<p class="text-stone-300 text-base">Mumbai, Maharashtra, India</p>
+</div>
+<div>
+<p class="text-xs uppercase tracking-wider text-stone-500 font-mono mb-2">Social Platforms</p>
+<div class="flex items-center gap-4 text-sm font-medium">
+<a class="text-stone-300 hover:text-white underline underline-offset-4" href="https://github.com/sid-1506" rel="noopener noreferrer" target="_blank">GitHub (sid-1506)</a>
+<a class="text-stone-300 hover:text-white underline underline-offset-4" href="https://www.linkedin.com/in/krishnakant-rout-867720292/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ContactSection -->
+<!-- BEGIN: MainFooter -->
+<footer class="py-12 px-6 md:px-10 max-w-7xl mx-auto border-t border-stone-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500 font-normal">
+<div class="flex items-center gap-2">
+<span class="font-medium text-stone-800">Krishnakant Rout</span>
+<span>—</span>
+<span>© 2025 All rights reserved.</span>
+</div>
+<div class="flex items-center gap-6">
+<span>Crafted with precision &amp; motion</span>
+<a class="text-stone-800 hover:underline" href="#hero">Back to top ↑</a>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- Interactive Agency Preview Follower & Lenis-Style Inertia Scroll Scripts -->
+<script>
+  // 1. Interactive Hover Image Preview Follower (grigoletti agency pattern)
+  const follower = document.getElementById('project-preview-follower');
+  const previewPanes = follower ? follower.querySelectorAll('.preview-pane') : [];
+  const projectRows = document.querySelectorAll('.editorial-project-row');
+
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
+  let isHovering = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // RAF loop for buttery smooth cursor physics on preview
+  function updatePreviewPosition() {
+    if (follower) {
+      followerX += (mouseX - followerX) * 0.15;
+      followerY += (mouseY - followerY) * 0.15;
+      follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) scale(${isHovering ? 1.02 : 0.9})`;
+    }
+    requestAnimationFrame(updatePreviewPosition);
+  }
+  requestAnimationFrame(updatePreviewPosition);
+
+  projectRows.forEach((row) => {
+    row.addEventListener('mouseenter', () => {
+      const targetId = row.getAttribute('data-preview-target');
+      previewPanes.forEach(pane => {
+        if (pane.id === targetId) {
+          pane.classList.add('is-visible');
+        } else {
+          pane.classList.remove('is-visible');
+        }
+      });
+      isHovering = true;
+      follower.classList.add('active');
+    });
+
+    row.addEventListener('mouseleave', () => {
+      isHovering = false;
+      follower.classList.remove('active');
+      previewPanes.forEach(pane => pane.classList.remove('is-visible'));
+    });
+  });
+
+  // 2. Scroll Reveal via IntersectionObserver
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  const observerOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => observer.observe(el));
+
+  // Trigger line reveals for Hero title upon page load
+  window.addEventListener('DOMContentLoaded', () => {
+    const heroLines = document.querySelectorAll('.hero-line-inner');
+    heroLines.forEach((line, index) => {
+      setTimeout(() => {
+        line.classList.add('line-revealed');
+      }, 150 + index * 120);
+    });
+  });
+
+  // 3. Inertia Momentum Lerp Simulation for Luxury Virtual Scroll feel
+  let currentScroll = window.pageYOffset;
+  let targetScroll = window.pageYOffset;
+  let isScrolling = false;
+
+  // Enhance wheel interaction on modern desktop browsers
+  window.addEventListener('wheel', (e) => {
+    if (window.innerWidth < 768) return; // Native behavior on mobile
+    // Soft inertial delta
+    targetScroll += e.deltaY * 0.85;
+    targetScroll = Math.max(0, Math.min(targetScroll, document.documentElement.scrollHeight - window.innerHeight));
+    if (!isScrolling) {
+      isScrolling = true;
+      requestAnimationFrame(renderSmoothScroll);
+    }
+  }, { passive: true });
+
+  function renderSmoothScroll() {
+    currentScroll += (targetScroll - currentScroll) * 0.1;
+    window.scrollTo(0, currentScroll);
+    if (Math.abs(targetScroll - currentScroll) > 0.6) {
+      requestAnimationFrame(renderSmoothScroll);
+    } else {
+      isScrolling = false;
+    }
+  }
+
+  // Update target on manual drag scroll
+  window.addEventListener('scroll', () => {
+    if (!isScrolling) {
+      targetScroll = window.pageYOffset;
+      currentScroll = window.pageYOffset;
+    }
+  }, { passive: true });
+</script>
+</body></html>

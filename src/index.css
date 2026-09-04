@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #F7F6F2;
+    --text: #242321;
+    --muted: #77736D;
+    --border: rgba(36, 35, 33, 0.16);
+    --accent: #35604C;
+    --footer-bg: #292724;
+    --footer-text: #F7F6F2;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #F7F6F2;
+  }
+}
+
+/* Micro-label utility */
+.font-mono-label {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Heading font styling per spec: Medium weight, compact line-height, no negative letter spacing */
+.font-heading {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+/* Standard editorial border */
+.border-editorial {
+  border-color: rgba(36, 35, 33, 0.16);
+}
+
+/* Smooth cubic-bezier(0.16, 1, 0.3, 1) */
+.ease-editorial {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Accessible focus styling */
+a:focus-visible,
+button:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+}
