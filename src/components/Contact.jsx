@@ -1,63 +1,56 @@
 export default function Contact() {
   return (
-    <footer id="contact" className="w-full bg-[#292724] text-[#F7F6F2] pt-20 md:pt-32 pb-14 md:pb-20">
+    <footer
+      id="contact"
+      className="w-full bg-[#35604C] text-white pt-16 pb-14 md:pt-20 md:pb-16 lg:py-10 xl:py-12"
+    >
       <div className="w-full px-6 md:px-12">
-        {/* Top micro-label */}
-        <div className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.14em] text-[#F7F6F2]/60 mb-8 md:mb-12">
-          Have a project in mind?
-        </div>
-
-        {/* Large Statement (Two Lines, Oversized Typography) */}
-        <div className="font-heading text-[clamp(2.75rem,7.5vw,7.2rem)] font-medium leading-[1.02] tracking-normal">
-          <div>Let’s make</div>
-          <div className="text-[#35604C]">something useful.</div>
-        </div>
-
-        {/* Thin Semi-transparent Divider & Three Columns */}
-        <div className="mt-16 md:mt-28 pt-10 md:pt-14 border-t border-[#F7F6F2]/15 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start font-mono text-[11px] md:text-xs">
-          {/* Column 1: Email */}
-          <div>
-            <div className="text-[#F7F6F2]/40 uppercase tracking-[0.12em] mb-2">
-              Direct Contact
-            </div>
-            <a
-              href="mailto:krishnakantrout1506@gmail.com"
-              className="text-[#F7F6F2] hover:text-[#35604C] transition-colors duration-200 underline decoration-1 underline-offset-4 decoration-[#F7F6F2]/30 hover:decoration-[#35604C]"
-            >
-              krishnakantrout1506@gmail.com
-            </a>
+        {/* Main Row: Single-line headline on left, two distributed contact columns on right on desktop */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-8 xl:gap-14">
+          {/* Left: Single-line Headline */}
+          <div className="lg:w-[42%] xl:w-[44%] shrink-0">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-[2.75rem] font-medium leading-[1.12] tracking-tight text-white whitespace-normal lg:whitespace-nowrap">
+              Let’s make something useful.
+            </h2>
           </div>
 
-          {/* Column 2: Social Links */}
-          <div className="flex flex-col gap-2.5">
-            <div className="text-[#F7F6F2]/40 uppercase tracking-[0.12em] mb-1">
-              Platforms
+          {/* Right: Two Evenly Distributed Contact Columns (Direct Contact & Platforms) */}
+          <div className="w-full lg:w-[58%] xl:w-[56%] flex flex-col sm:flex-row sm:items-start justify-between gap-8 sm:gap-10 font-mono lg:pl-10 xl:pl-16">
+            {/* Column 1: Direct Contact (Shifted slightly right from the headline) */}
+            <div className="lg:pl-4 xl:pl-8">
+              <div className="text-white/70 uppercase tracking-[0.12em] text-xs sm:text-[13px] mb-2">
+                Direct Contact
+              </div>
+              <a
+                href="mailto:krishnakantrout1506@gmail.com"
+                className="text-sm sm:text-[14px] md:text-[15px] text-white hover:text-white/80 transition-colors duration-200 underline decoration-1 underline-offset-4 decoration-white/40 hover:decoration-white break-all sm:break-normal"
+              >
+                krishnakantrout1506@gmail.com
+              </a>
             </div>
-            <a
-              href="https://www.linkedin.com/in/krishnakant-rout-867720292/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#F7F6F2] hover:text-[#35604C] transition-colors duration-200 inline-flex items-center gap-1"
-            >
-              <span>LinkedIn ↗</span>
-            </a>
-            <a
-              href="https://github.com/sid-1506"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#F7F6F2] hover:text-[#35604C] transition-colors duration-200 inline-flex items-center gap-1"
-            >
-              <span>GitHub ↗</span>
-            </a>
-          </div>
 
-          {/* Column 3: Location & Copyright */}
-          <div className="flex flex-col gap-1 md:text-right">
-            <div className="text-[#F7F6F2]/40 uppercase tracking-[0.12em] mb-1">
-              Location
+            {/* Column 2: Platforms (Given generous rightward spacing across the footer width) */}
+            <div className="flex flex-col gap-2 sm:text-right lg:pr-2">
+              <div className="text-white/70 uppercase tracking-[0.12em] text-xs sm:text-[13px] mb-1">
+                Platforms
+              </div>
+              <a
+                href="https://www.linkedin.com/in/krishnakant-rout-867720292/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm sm:text-[14px] md:text-[15px] text-white hover:text-white/80 transition-colors duration-200 inline-flex items-center gap-1 sm:justify-end"
+              >
+                <span>LinkedIn ↗</span>
+              </a>
+              <a
+                href="https://github.com/sid-1506"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm sm:text-[14px] md:text-[15px] text-white hover:text-white/80 transition-colors duration-200 inline-flex items-center gap-1 sm:justify-end"
+              >
+                <span>GitHub ↗</span>
+              </a>
             </div>
-            <div className="text-[#F7F6F2]">Mumbai, India</div>
-            <div className="text-[#F7F6F2]/60 mt-1">© 2026</div>
           </div>
         </div>
       </div>

@@ -4,8 +4,10 @@ import IntroCurtain from './components/IntroCurtain'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import SelectedWork from './components/SelectedWork'
-import Capabilities from './components/Capabilities'
+import Skills from './components/Skills'
+import Experience from './components/Experience'
 import About from './components/About'
+import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import CustomCursor from './components/CustomCursor'
 
@@ -46,12 +48,14 @@ export default function App() {
       {/* 2. Top Navigation */}
       <Navbar />
 
-      {/* 3. Main Content Flow: Hero -> Capabilities -> Projects -> About */}
+      {/* 3. Main Content Flow: Hero -> Skills -> Experience -> Projects -> About -> Achievements */}
       <main id="main-content">
         <Hero />
-        <Capabilities />
+        <Skills />
+        <Experience />
         <SelectedWork />
         <About />
+        <Achievements />
       </main>
 
       {/* 4. Full-width Dark Contact Footer */}

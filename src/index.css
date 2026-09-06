@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Hide default system mouse pointer globally so only the custom cursor is visible */
+html,
+body,
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+a,
+button,
+[role="button"],
+input,
+textarea,
+select {
+  cursor: none !important;
+}
+
 @layer base {
   :root {
     --bg: #F7F6F2;

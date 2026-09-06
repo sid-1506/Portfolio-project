@@ -18,8 +18,54 @@ export default function Navbar() {
           Full stack developer
         </a>
 
-        {/* Right: Work, About, Contact */}
-        <nav className="flex items-center gap-6 md:gap-10 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-[#77736D]">
+        {/* Desktop Navigation: All Sections */}
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-[#77736D]">
+          <a
+            href="#skills"
+            onClick={(e) => handleScroll(e, 'skills')}
+            className="hover:text-[#242321] transition-colors duration-200"
+          >
+            Skills
+          </a>
+          <a
+            href="#experience"
+            onClick={(e) => handleScroll(e, 'experience')}
+            className="hover:text-[#242321] transition-colors duration-200"
+          >
+            Experience
+          </a>
+          <a
+            href="#work"
+            onClick={(e) => handleScroll(e, 'work')}
+            className="hover:text-[#242321] transition-colors duration-200"
+          >
+            Work
+          </a>
+          <a
+            href="#about"
+            onClick={(e) => handleScroll(e, 'about')}
+            className="hover:text-[#242321] transition-colors duration-200"
+          >
+            About
+          </a>
+          <a
+            href="#achievements"
+            onClick={(e) => handleScroll(e, 'achievements')}
+            className="hover:text-[#242321] transition-colors duration-200"
+          >
+            Achievements
+          </a>
+          <a
+            href="#contact"
+            onClick={(e) => handleScroll(e, 'contact')}
+            className="hover:text-[#242321] transition-colors duration-200"
+          >
+            Contact
+          </a>
+        </nav>
+
+        {/* Mobile Navigation: Untouched 3 items */}
+        <nav className="flex md:hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.12em] text-[#77736D]">
           <a
             href="#work"
             onClick={(e) => handleScroll(e, 'work')}

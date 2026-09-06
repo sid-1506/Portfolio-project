@@ -38,11 +38,11 @@ export default function About() {
     >
       <div className="w-full px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Left Column: Micro Label */}
+          {/* Left Column: Heading matching other sections */}
           <div className="lg:col-span-3">
-            <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-[#77736D]">
-              ABOUT / {'{ INFORMATION }'}
-            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-[#242321] font-medium leading-tight lg:sticky lg:top-24">
+              About
+            </h2>
           </div>
 
           {/* Right Column: Paragraph & Credentials */}
