@@ -37,6 +37,30 @@ export default function App() {
     }
   }, [])
 
+  // Send visitor notification once per browser session
+  useEffect(() => {
+    try {
+      // Prevent duplicate notifications in the same tab session
+      if (sessionStorage.getItem('visit_notified')) return
+      sessionStorage.setItem('visit_notified', 'true')
+
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          page: window.location.pathname,
+          referrer: document.referrer || '',
+          userAgent: navigator.userAgent,
+        }),
+      }).catch((err) => {
+        // Fail silently without disrupting user experience
+        console.error('Visitor notification failed:', err)
+      })
+    } catch (err) {
+      console.error('Visitor notification error:', err)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#F7F6F2] text-[#242321] selection:bg-[#35604C] selection:text-[#F7F6F2]">
       {/* Editorial Custom Pointer */}
