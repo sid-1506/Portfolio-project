@@ -39,11 +39,15 @@ export default async function handler(req, res) {
 
     // 5. Build readable message
     const formattedReferrer = referrer && referrer.trim() ? referrer.trim() : 'Direct'
-    const currentTime = new Date().toLocaleString('en-US', {
-      timeZone: 'UTC',
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    }) + ' UTC'
+    const currentTime = new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }) + " IST"
 
     const message = [
       '🔔 New visitor',
