@@ -3,15 +3,15 @@ import { motion } from 'framer-motion'
 const skillCategories = [
   {
     key: 'frontend',
-    items: ['JavaScript', 'React', 'Redux', 'Next.js', 'Framer Motion'],
+    items: ['JavaScript', 'React', 'Redux', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Figma'],
   },
   {
     key: 'backend',
-    items: ['Node.js', 'Express', 'MongoDB'],
+    items: ['Node.js', 'Express', 'MongoDB', 'React Router'],
   },
   {
     key: 'tools',
-    items: ['Postman', 'React Router'],
+    items: ['Git', 'GitHub', 'Postman'],
   },
 ]
 
@@ -57,17 +57,23 @@ export default function Skills() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1"
                   >
-                    <span className="text-[#77736D]">{category.key}:</span>{' '}
-                    <span className="text-[#77736D]">[</span>
-                    {category.items.map((item, idx, arr) => (
-                      <span key={item} className="inline-flex items-baseline">
-                        <span className="text-[#77736D]">&quot;</span>
-                        <span className="text-[#242321]">{item}</span>
-                        <span className="text-[#77736D]">&quot;</span>
-                        {idx < arr.length - 1 && <span className="text-[#77736D] mr-1">,</span>}
-                      </span>
-                    ))}
-                    <span className="text-[#77736D]">],</span>
+                    <span className="text-[#77736D] whitespace-nowrap">{category.key}: [</span>
+                    {category.items.map((item, idx, arr) => {
+                      const isLast = idx === arr.length - 1
+                      return (
+                        <span key={item} className="inline-flex items-baseline whitespace-nowrap">
+                          <span className="text-[#77736D]">&quot;</span>
+                          <span className="text-[#242321]">{item}</span>
+                          <span className="text-[#77736D]">&quot;</span>
+                          {isLast ? (
+                            <span className="text-[#77736D]">],</span>
+                          ) : (
+                            <span className="text-[#77736D]">,</span>
+                          )}
+                        </span>
+                      )
+                    })}
+                    {category.items.length === 0 && <span className="text-[#77736D]">],</span>}
                   </motion.div>
                 ))}
               </div>
