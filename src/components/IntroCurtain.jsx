@@ -43,6 +43,7 @@ export default function IntroCurtain() {
     // 4. Animation completes: 4.45s + (4 * 0.08s) + 0.9s = 5.67s. Remove from DOM at 5.8s
     const doneTimer = setTimeout(() => {
       setIsMounted(false)
+      window.dispatchEvent(new CustomEvent('intro-complete'))
     }, 5800)
 
     return () => {

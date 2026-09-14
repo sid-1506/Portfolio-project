@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 })
-  const [isHovered, setIsHovered] = useState(false)
-  const [isDarkBg, setIsDarkBg] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const cursorRef = useRef(null)
   const reduceMotion = useReducedMotion()
 
   useEffect(() => {
@@ -14,68 +13,58 @@ export default function CustomCursor() {
       return
     }
 
-    const updateCursorState = (target) => {
-      if (!target) return
-      const inDark = Boolean(target.closest('footer') || target.closest('#contact'))
-      setIsDarkBg(inDark)
-
-      const interactive = Boolean(
-        target.closest('a') ||
-        target.closest('button') ||
-        target.closest('h1') ||
-        target.closest('h2') ||
-        target.closest('h3') ||
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON'
-      )
-      setIsHovered(interactive)
-    }
-
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
+      } else {
+        setMousePosition({ x: e.clientX, y: e.clientY })
+      }
       if (!isVisible) setIsVisible(true)
-      updateCursorState(e.target)
     }
 
     const handleMouseLeave = () => setIsVisible(false)
     const handleMouseEnter = () => setIsVisible(true)
 
-    const handlePointerOver = (e) => {
-      updateCursorState(e.target)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     document.addEventListener('mouseleave', handleMouseLeave)
     document.addEventListener('mouseenter', handleMouseEnter)
-    document.addEventListener('mouseover', handlePointerOver)
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseleave', handleMouseLeave)
       document.removeEventListener('mouseenter', handleMouseEnter)
-      document.removeEventListener('mouseover', handlePointerOver)
     }
   }, [isVisible, reduceMotion])
 
   if (reduceMotion || !isVisible) return null
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-150 ease-out"
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 pointer-events-none z-[99999]"
       style={{
-        left: `${mousePosition.x}px`,
-        top: `${mousePosition.y}px`,
+        transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`,
+        willChange: 'transform',
       }}
-      animate={{
-        width: isHovered ? 32 : 16,
-        height: isHovered ? 32 : 16,
-        backgroundColor: 'transparent',
-        border: isDarkBg ? '1.5px solid #FFFFFF' : '1.5px solid #35604C',
-      }}
-      transition={{
-        duration: 0.2,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-    />
+    >
+      <svg
+        width="14.5"
+        height="24.65"
+        viewBox="0 0 17 29"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="block"
+      >
+        <path
+          d="M 0.75 0.75 L 0.75 21.85 L 5.25 17.35 L 9.55 27.65 L 13.25 25.85 L 9.15 16.05 L 15.75 16.05 Z"
+          fill="#35604C"
+          stroke="#FFFFFF"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          style={{ paintOrder: 'stroke fill' }}
+        />
+      </svg>
+    </div>
   )
 }

@@ -1,9 +1,10 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 
 export default function About() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, margin: '-12% 0px' })
+  const reduceMotion = useReducedMotion()
 
   const rawText =
     'I am a full stack developer who builds websites and web applications for real businesses. I have worked with 10+ clients across automotive, industrial, hospitality and creative fields, with care for clean architecture, fast pages and restrained design.'
@@ -40,9 +41,30 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Heading matching other sections */}
           <div className="lg:col-span-3">
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-[#242321] font-medium leading-tight lg:sticky lg:top-24">
-              About
-            </h2>
+            <motion.h2
+              initial={reduceMotion ? false : 'hidden'}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl text-[#242321] font-medium leading-tight lg:sticky lg:top-24"
+            >
+              <span className="block overflow-hidden pb-1 -mb-1">
+                <motion.span
+                  className="block"
+                  variants={{
+                    hidden: { y: '105%' },
+                    visible: {
+                      y: '0%',
+                      transition: {
+                        duration: 0.9,
+                        ease: [0.16, 1, 0.3, 1],
+                      },
+                    },
+                  }}
+                >
+                  About
+                </motion.span>
+              </span>
+            </motion.h2>
           </div>
 
           {/* Right Column: Paragraph & Credentials */}

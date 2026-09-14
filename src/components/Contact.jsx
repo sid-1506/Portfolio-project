@@ -1,4 +1,8 @@
+import { motion, useReducedMotion } from 'framer-motion'
+
 export default function Contact() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <footer
       id="contact"
@@ -9,9 +13,30 @@ export default function Contact() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-8 xl:gap-14">
           {/* Left: Single-line Headline */}
           <div className="lg:w-[42%] xl:w-[44%] shrink-0">
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-[2.75rem] font-medium leading-[1.12] tracking-tight text-white whitespace-normal lg:whitespace-nowrap">
-              Let’s make something useful.
-            </h2>
+            <motion.h2
+              initial={reduceMotion ? false : 'hidden'}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="font-heading text-3xl sm:text-4xl lg:text-[2.25rem] xl:text-[2.75rem] font-medium leading-[1.12] tracking-tight text-white whitespace-normal lg:whitespace-nowrap"
+            >
+              <span className="block overflow-hidden pb-1 -mb-1">
+                <motion.span
+                  className="block"
+                  variants={{
+                    hidden: { y: '105%' },
+                    visible: {
+                      y: '0%',
+                      transition: {
+                        duration: 0.9,
+                        ease: [0.16, 1, 0.3, 1],
+                      },
+                    },
+                  }}
+                >
+                  Let’s make something useful.
+                </motion.span>
+              </span>
+            </motion.h2>
           </div>
 
           {/* Right: Two Evenly Distributed Contact Columns (Direct Contact & Platforms) */}

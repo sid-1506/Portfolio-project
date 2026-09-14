@@ -56,6 +56,8 @@ const projects = [
 ]
 
 export default function SelectedWork() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section id="work" className="w-full pt-16 md:pt-24 pb-20 md:pb-32">
       <div className="w-full px-6 md:px-12">
@@ -64,9 +66,30 @@ export default function SelectedWork() {
           <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.14em] text-[#35604C] block mb-2">
             Selected work
           </span>
-          <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl text-[#242321]">
-            Projects.
-          </h2>
+          <motion.h2
+            initial={reduceMotion ? false : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="font-heading text-4xl sm:text-5xl md:text-6xl text-[#242321]"
+          >
+            <span className="block overflow-hidden pb-1 -mb-1">
+              <motion.span
+                className="block"
+                variants={{
+                  hidden: { y: '105%' },
+                  visible: {
+                    y: '0%',
+                    transition: {
+                      duration: 0.9,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                  },
+                }}
+              >
+                Projects.
+              </motion.span>
+            </span>
+          </motion.h2>
         </div>
 
         {/* Clean 2-Column Grid on Desktop (Exactly 2 equal cards per row, 4 projects total, 0 empty slots), 1-Column on Mobile/Tablet */}

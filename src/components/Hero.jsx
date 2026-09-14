@@ -1,10 +1,28 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import portraitImg from '../assets/portrait.jpeg'
 
 export default function Hero() {
   const containerRef = useRef(null)
   const reduceMotion = useReducedMotion()
+  const [introFinished, setIntroFinished] = useState(false)
+
+  useEffect(() => {
+    if (reduceMotion) return
+
+    const onComplete = () => setIntroFinished(true)
+    window.addEventListener('intro-complete', onComplete)
+
+    // Fallback timer matching IntroCurtain unmount (5.8s)
+    const timer = setTimeout(() => {
+      setIntroFinished(true)
+    }, 5800)
+
+    return () => {
+      window.removeEventListener('intro-complete', onComplete)
+      clearTimeout(timer)
+    }
+  }, [reduceMotion])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -26,8 +44,42 @@ export default function Hero() {
       <div className="w-full flex items-center justify-between gap-3 sm:gap-6">
         <motion.div style={{ y: nameY }} className="flex-1 min-w-0">
           <h1 className="font-heading text-[clamp(2.35rem,7vw,8.5rem)] text-[#242321] hover:text-[#35604C] transition-colors duration-300 md:whitespace-nowrap leading-[0.92] cursor-pointer">
-            <span className="block md:inline">Krishnakant</span>{' '}
-            <span className="block md:inline">Rout</span>
+            <span className="block md:inline-block overflow-hidden align-bottom">
+              <motion.span
+                className="inline-block"
+                initial={reduceMotion ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
+                animate={
+                  reduceMotion || introFinished
+                    ? { y: '0%', opacity: 1 }
+                    : { y: '105%', opacity: 0 }
+                }
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0,
+                }}
+              >
+                Krishnakant
+              </motion.span>
+            </span>{' '}
+            <span className="block md:inline-block overflow-hidden align-bottom">
+              <motion.span
+                className="inline-block"
+                initial={reduceMotion ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
+                animate={
+                  reduceMotion || introFinished
+                    ? { y: '0%', opacity: 1 }
+                    : { y: '105%', opacity: 0 }
+                }
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.12,
+                }}
+              >
+                Rout
+              </motion.span>
+            </span>
           </h1>
         </motion.div>
 
@@ -64,9 +116,11 @@ export default function Hero() {
             <span className="font-mono text-base sm:text-lg md:text-xl text-[#77736D] select-none block mb-1">
               console.log(
             </span>
-            <p className="font-normal text-[#242321] text-2xl sm:text-3xl md:text-[2.65rem] lg:text-[3.15rem] leading-[1.22] tracking-normal pl-4 sm:pl-6 md:pl-8">
-              &quot;Full Stack Developer building and shipping{' '}
-              <span className="text-[#35604C]">production ready</span> web applications.&quot;
+            <p className="font-normal text-[#242321] text-xl sm:text-2xl md:text-[2.1rem] lg:text-[2.45rem] leading-[1.25] tracking-normal pl-4 sm:pl-6 md:pl-8">
+              &quot;Full Stack Developer engineering{' '}
+              <span className="text-[#35604C] whitespace-nowrap">production-grade</span> applications with React,
+              Node.js, REST APIs, MongoDB, and automated CI/CD, with a focus on performance and
+              scalability.&quot;
             </p>
             <span className="font-mono text-base sm:text-lg md:text-xl text-[#77736D] select-none block mt-1">
               )
