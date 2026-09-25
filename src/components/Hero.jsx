@@ -1,28 +1,10 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import portraitImg from '../assets/portrait.jpeg'
 
 export default function Hero() {
   const containerRef = useRef(null)
   const reduceMotion = useReducedMotion()
-  const [introFinished, setIntroFinished] = useState(false)
-
-  useEffect(() => {
-    if (reduceMotion) return
-
-    const onComplete = () => setIntroFinished(true)
-    window.addEventListener('intro-complete', onComplete)
-
-    // Fallback timer matching IntroCurtain unmount (5.8s)
-    const timer = setTimeout(() => {
-      setIntroFinished(true)
-    }, 5800)
-
-    return () => {
-      window.removeEventListener('intro-complete', onComplete)
-      clearTimeout(timer)
-    }
-  }, [reduceMotion])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -44,42 +26,8 @@ export default function Hero() {
       <div className="w-full flex items-center justify-between gap-3 sm:gap-6">
         <motion.div style={{ y: nameY }} className="flex-1 min-w-0">
           <h1 className="font-heading text-[clamp(2.35rem,7vw,8.5rem)] text-[#242321] hover:text-[#35604C] transition-colors duration-300 md:whitespace-nowrap leading-[0.92] cursor-pointer">
-            <span className="block md:inline-block overflow-hidden align-bottom">
-              <motion.span
-                className="inline-block"
-                initial={reduceMotion ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
-                animate={
-                  reduceMotion || introFinished
-                    ? { y: '0%', opacity: 1 }
-                    : { y: '105%', opacity: 0 }
-                }
-                transition={{
-                  duration: 0.9,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 0,
-                }}
-              >
-                Krishnakant
-              </motion.span>
-            </span>{' '}
-            <span className="block md:inline-block overflow-hidden align-bottom">
-              <motion.span
-                className="inline-block"
-                initial={reduceMotion ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
-                animate={
-                  reduceMotion || introFinished
-                    ? { y: '0%', opacity: 1 }
-                    : { y: '105%', opacity: 0 }
-                }
-                transition={{
-                  duration: 0.9,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 0.12,
-                }}
-              >
-                Rout
-              </motion.span>
-            </span>
+            <span className="block md:inline-block">Krishnakant</span>{' '}
+            <span className="block md:inline-block">Rout</span>
           </h1>
         </motion.div>
 
