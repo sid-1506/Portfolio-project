@@ -23,15 +23,15 @@ export default function Hero() {
       className="relative w-full min-h-0 lg:min-h-[92vh] px-6 md:px-12 flex flex-col justify-start lg:justify-between pt-6 md:pt-8 pb-8 md:pb-6 overflow-hidden"
     >
       {/* Top Hero Row: On mobile, Name (Left) + Compact Portrait (Right). On desktop, Name only */}
-      <div className="w-full flex items-center justify-between gap-3 sm:gap-6">
+      <div className="w-full flex items-center justify-between gap-5 sm:gap-8">
         <motion.div style={{ y: nameY }} className="flex-1 min-w-0">
-          <h1 className="font-heading text-[clamp(2.35rem,7vw,8.5rem)] text-[#242321] hover:text-[#35604C] transition-colors duration-300 md:whitespace-nowrap leading-[0.92] cursor-pointer">
+          <h1 className="font-heading text-[clamp(1.5rem,6.8vw,2.5rem)] sm:text-[clamp(2.2rem,5vw,3.5rem)] lg:text-[clamp(2.35rem,7vw,8.5rem)] text-[#242321] hover:text-[#35604C] transition-colors duration-300 md:whitespace-nowrap leading-[0.92] cursor-pointer">
             <span className="block md:inline-block">Krishnakant</span>{' '}
             <span className="block md:inline-block">Rout</span>
           </h1>
         </motion.div>
 
-        {/* Mobile-only compact portrait photo to the right of the name (38% width, natural ratio, 18px rounded) */}
+        {/* Mobile-only compact portrait photo to the right of the name */}
         <motion.div
           initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -41,7 +41,7 @@ export default function Hero() {
             delay: 0.1,
           }}
           style={{ y: portraitY }}
-          className="block lg:hidden shrink-0 w-[38vw] max-w-[165px] min-w-[125px] select-none"
+          className="block lg:hidden shrink-0 w-[35vw] max-w-[155px] min-w-[100px] select-none"
         >
           <img
             src={portraitImg}
