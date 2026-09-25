@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import portraitImg from '../assets/portrait.jpeg'
+import resumePdf from '../assets/Krishnakant_Resume_2026.pdf'
 
 export default function Hero() {
   const containerRef = useRef(null)
@@ -81,8 +82,32 @@ export default function Hero() {
           </div>
 
           {/* Micro-statement */}
-          <div className="mt-5 sm:mt-6 lg:mt-10 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.14em] text-[#77736D]">
+          <div className="mt-4 sm:mt-5 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.14em] text-[#77736D]">
             <span>10+ REAL-WORLD CLIENTS</span>
+          </div>
+
+          {/* Resume CTA */}
+          <div className="mt-5 sm:mt-6">
+            <a
+              href={resumePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Krishnakant_Rout_Resume.pdf"
+              className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-[#35604C] text-[#F7F6F2] border border-[#35604C] hover:bg-transparent hover:text-[#35604C] font-heading text-xs sm:text-[13px] tracking-[0.12em] uppercase font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] select-none"
+            >
+              <span>Download Resume</span>
+              <svg
+                className="w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0.5"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M8 2.5v8m0 0l-3-3m3 3l3-3M3 13.5h10" />
+              </svg>
+            </a>
           </div>
         </motion.div>
 
@@ -96,7 +121,7 @@ export default function Hero() {
             delay: 0.15,
           }}
           style={{ y: portraitY }}
-          className="hidden lg:flex lg:w-[35%] justify-end items-end select-none"
+          className="hidden lg:flex lg:w-[35%] justify-end items-end lg:mb-10 xl:mb-14 select-none"
         >
           <img
             src={portraitImg}
