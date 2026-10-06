@@ -66,10 +66,10 @@ export default function Hero() {
               console.log(
             </span>
             <p className="font-normal text-[#242321] text-xl sm:text-2xl md:text-[2.1rem] lg:text-[2.45rem] leading-[1.25] tracking-normal pl-4 sm:pl-6 md:pl-8">
-              &quot;Full Stack Developer engineering{' '}
-              <span className="text-[#35604C] whitespace-nowrap">production-grade</span> applications with React,
-              Node.js, REST APIs, MongoDB, and automated CI/CD, with a focus on performance and
-              scalability.&quot;
+              &quot;Full Stack Developer &amp; UI/UX Designer with 2+ years of freelance
+              experience, having delivered a range of{' '}
+              <span className="text-[#35604C] whitespace-nowrap">real-world</span> web projects from
+              intuitive interfaces to scalable applications.&quot;
             </p>
             <span className="font-mono text-base sm:text-lg md:text-xl text-[#77736D] select-none block mt-1">
               )

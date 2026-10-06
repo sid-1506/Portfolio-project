@@ -7,7 +7,7 @@ export default function About() {
   const reduceMotion = useReducedMotion()
 
   const rawText =
-    'I am a full stack developer who builds websites and web applications for real businesses. I have worked with 10+ clients across automotive, industrial, hospitality and creative fields, with care for clean architecture, fast pages and restrained design.'
+    'I am a full stack developer who builds websites and web applications for real businesses. I have worked with Ample Amount of clients across automotive, industrial, hospitality and creative fields, with care for clean architecture, fast pages and restrained design.'
 
   const words = rawText.split(' ')
 
