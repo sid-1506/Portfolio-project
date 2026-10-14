@@ -4,9 +4,10 @@ Personal portfolio website built with React, Vite, and Tailwind CSS to showcase 
 
 ## Tech Stack
 
-* **Frontend:** React 19, Tailwind CSS, Vite
+* **Frontend:** React 19, Tailwind CSS v4, Vite
 * **Animations:** Framer Motion, Lenis (smooth scroll)
 * **Icons:** Lucide React
+* **Analytics:** Vercel Analytics
 * **Deployment:** Vercel
 
 ## Key Features
